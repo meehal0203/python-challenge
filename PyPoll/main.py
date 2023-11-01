@@ -14,15 +14,16 @@ import os
 import csv
 
 #set path to collect data
-my_poll = os.path.join("python-challenge","PyPoll", "Resources", "election_data.csv")
+my_poll = os.path.join("Resources", "election_data.csv")
 
-with open(my_poll) as csvfile
+with open(my_poll) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     
     # read header row
     header = next(csvreader)
-    
-    # declare variables
+    print(header)
+
+    # # declare variables
     total_votes = [] #total votes
     can_total = [] #total votes per candidate
     can_name = [] #candidate name
@@ -37,8 +38,11 @@ with open(my_poll) as csvfile
     can_total = 0
     
     
-    #read in data by row, column
+    #read in data by row
         
     for row in csv_reader:
         total_votes += 1
         can_name = row[2]
+        
+    #print total votes
+    print(total_votes)
