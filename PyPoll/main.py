@@ -45,12 +45,16 @@ with open(my_poll) as csvfile:
         
         # tally up votes to each candidate
         can_votes[can_name] += 1
+        print(can_votes)
+         #find winner
 
-    #find winner
 
+        # candidates = list(can_votes.keys())
 
-    print(can_votes)
+        # winner_name = candidates[winner_vote]
+
+        
 
     # calculate percentage each candidate received
-    #percent_votes_each = can_votes / total_votes * 100
-    #print(percent_votes_each)
+    percent_votes_each = can_votes / total_votes * 100
+    print(percent_votes_each)
