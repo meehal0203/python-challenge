@@ -14,7 +14,7 @@ import os
 import csv
 
 #set path to collect data
-my_file = os.path.join("Resources", "budget_data.csv")
+my_file = os.path.join("..","Resources", "budget_data.csv")
 
 # open and read csv file
 with open(my_file) as csv_file:
