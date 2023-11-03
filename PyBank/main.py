@@ -2,7 +2,8 @@
 
 #The net total amount of "Profit/Losses" over the entire period
 
-#The changes in "Profit/Losses" over the entire period, and then the average of those changes
+#The changes in "Profit/Losses" over the entire period, 
+# and then the average of those changes
 
 #The greatest increase in profits (date and amount) over the entire period
 
@@ -15,57 +16,74 @@ import os
 import csv
 
 #set path to collect data
-my_file = os.path.join("budget_data.csv")
+CSV_PATH = os.path.join("Resources","budget_data.csv")
 
+
+# print("I'm here:", os.getcwd())
+# print(__file__)
+# print(os.path.dirname(__file__))
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+# print("Now I'm here:", os.getcwd())
 # open and read csv file
-with open(my_file) as csv_file:
+ #set variables
+monthly_count = 0
+month_of_change = []
+profit_change = []
+greatest_increase = ["", 0]
+greatest_decrease = ["", 9999999]
+total_change = 0
+
+
+with open(CSV_PATH) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     
     # read the header row first
     header = next(csv_reader)
-    print(header)
+    # print(header)
     
-    #set variables
-    monthly_count = 0
-    total_vol = 0
-    profit_change = 0
-    great_increase = 0
-    great_decrease = 0
-    great_inc_date = " "
-    great_dec_date = " "
-    profit_loss = 0
-    previous_profit_loss = 0
-    date = []
+    first_row = next(csv_reader)
+    monthly_count += 1
+    total_change += int(first_row[1])
+    previous_net = int(first_row[1])
     
 
     # read through each row of data after the header
     for row in csv_reader:
         # find number of months in dataset
+        
         monthly_count += 1
+        total_change += int(row[1])
+        
+        current_change = int(row[1]) - previous_net
+        previous_net = int(row[1])
+
+        profit_change += [current_change]
+        month_of_change += [row[0]]
+
+        
        
-       # print(monthly_count)
+        # Calculate the greatest increase
+        if current_change > greatest_increase[1]:
+            greatest_increase[0] = row[0]
+            greatest_increase[1] = current_change
+        # Calculate the greatest decrease
+        if current_change < greatest_decrease[1]:
+            greatest_decrease[0] = row[0]
+            greatest_decrease[1] = current_change
+   
 
-        # total net amount profit and loss
-        total_vol += int(row[1])
-        # print(total_vol)
-
-        # find changes in P&L, month to month
-        # loop through each month, subtract new month from previous
-        for i in range(len(profit_loss)-1):
-           profit_change = profit_loss[i+1] - previous_profit_loss[i]
-           profit_change.append()
-
-        #find max profit increase month to month
-        # date  and amount
-        great_increase = max(profit_change)
-        great_inc_date = 
-    
-        #find max profit decrease month to month
-        # date  and amount
-        great_decrease = min(profit_change)
-        great_dec_date = 
+  
+# average changes
+average_change = sum(profit_change) / len(profit_change)
 
 
-        # your final script should both print the analysis to
-        #  the terminal and export a text file with the results.
-       
+output = (
+    f"Financial Analysis\n"
+    f"----------------------------\n"
+    f"Total Months: {monthly_count}\n"
+    f"Total: ${total_change}\n"
+    f"Average Change: ${average_change:.2f}\n"
+    f"Greatest Increase in Profits: {greatest_increase[0]} (${greatest_increase[1]})\n"
+    f"Greatest Decrease in Profits: {greatest_decrease[0]} (${greatest_decrease[1]})\n")
+# Print the output (to terminal)
+print(output)  
