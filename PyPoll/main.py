@@ -10,6 +10,9 @@
 
 
 #imports
+
+# allow us to create file paths across operating systems
+# allows us to read CSV files
 import os
 import csv
 
@@ -45,16 +48,28 @@ with open(my_poll) as csvfile:
         
         # tally up votes to each candidate
         can_votes[can_name] += 1
-        print(can_votes)
-         #find winner
-
-
-        # candidates = list(can_votes.keys())
-
-        # winner_name = candidates[winner_vote]
-
+       #  print(can_votes)
         
+        # calculate percentage each candidate received
+        percent_votes_each = can_votes / total_votes * 100
+        # print(percent_votes_each)
 
-    # calculate percentage each candidate received
-    percent_votes_each = can_votes / total_votes * 100
-    print(percent_votes_each)
+
+
+        # election winner based on popular vote
+        winner_name = max(can_votes)
+
+
+        # your final script should both print the analysis to
+        #  the terminal and export a text file with the results.
+
+ # print results
+print("Election Results")
+print("...........................")
+print(f"Total Votes: {total_votes}")
+print("...........................")
+for can_name, can_votes in total_votes.items():
+    print(f"{can_name}: {can_votes:} {percent_votes_each}")
+print("...........................")
+print(f"Winner:{winner_name}")
+print("...........................s")
