@@ -39,49 +39,54 @@ with open(CSVPATH, encoding='UTF-8') as csvfile:
     
 
     
-#read in data by row
- # total number of votes cast   
+    #read in data by row
+    # total number of votes cast   
     for row in csvreader:
         total_votes += 1
         can_name = row[2]
-    print(total_votes)
+        print(total_votes)
+    
 
-    # complete list of candidates who received votes
-    # find candidates name and add name to list
-    if can_name not in can_options:
-        can_votes[can_name] = 0
-        can_options += [can_name]
-        # print(can_options)
 
-        # tally up votes to each candidate
-        can_votes[can_name] += 1
-        # print(can_votes)
+        # complete list of candidates who received votes
+        # find candidates name and add name to list
+        if  can_name in can_votes:
+            can_votes[can_name] += 1
+        else:
+            can_votes[can_name] = 1
+
+    
+     
+     
+        # if can_name not in can_options:
+        #     can_votes[can_name] = 0
+        #     can_options += [can_name]
+        #     # print(can_options)
+
+        #     # tally up votes to each candidate
+        #     total_can_votes = can_votes[can_name] += 1
+        
+            print(can_votes)
         
         # calculate percentage each candidate received
-        percent_votes_each = (can_votes[can_name]/total_votes) * 100
-        print(percent_votes_each)
-
-
-
+            percent_votes_each = can_votes[can_name]/total_votes * 100
+            print(percent_votes_each)
+           
         # election winner based on popular vote
-        #if can_votes > winner_vote[0]:
-        #    winner_vote = winner_name[2]
-
         # list out keys and values separately
-        key_list = list(can_votes.keys())
-        val_list = list(can_votes.values())
+            key_list = list(can_votes.keys())
+            val_list = list(can_votes.values())
+            max_votes = max(val_list)
 
-        max_votes = max(val_list)
-
-    # print key with val max_votes
-        winner_name = val_list.index(max_votes)
-        max_votes = winner_name
-    # print(key_list[position])
+         # print key with val max_votes
+            winner_name = val_list.index(max_votes)
+            max_votes = winner_name
+        # print(key_list[position])
 
         # your final script should both print the analysis to
         #  the terminal and export a text file with the results.
 
- # print results
+        # print results
 print("Election Results")
 print("...........................")
 print(f"Total Votes: {total_votes}")
@@ -89,5 +94,5 @@ print("...........................")
 for can_name, can_votes in can_votes.items():
     print(f"{can_name:} {can_votes:} {percent_votes_each:.2f}")
 print("...........................")
-print(f"Winner:{winner_name}")
+print(f"Winner:{can_name}")
 print("............................")
