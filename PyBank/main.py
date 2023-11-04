@@ -87,3 +87,17 @@ output = (
     f"Greatest Decrease in Profits: {greatest_decrease[0]} (${greatest_decrease[1]})\n")
 # Print the output (to terminal)
 print(output)  
+
+# print output to analysis.txt file
+
+output_file = open("PyBank Analysis.txt", "w")
+output_file.write(f"Financial Analysis\n")
+output_file.write(f"----------------------------\n")
+output_file.write(f"Total Months: {monthly_count}\n")
+output_file.write(f"Total: ${total_change}\n")
+output_file.write(f"Average Change: ${average_change:.2f}\n")
+output_file.write(f"Greatest Increase in Profits: {greatest_increase[0]} (${greatest_increase[1]})\n")
+output_file.write(f"Greatest Decrease in Profits: {greatest_decrease[0]} (${greatest_decrease[1]})\n")
+
+# close output file
+output_file.close()
