@@ -86,20 +86,20 @@ with open(CSVPATH, encoding='UTF-8') as csvfile:
     print(f"Winner:{winner}")
     print("............................")
 
-# print results to analysis text file
-output_file = open("PyPoll Analysis.txt", "w")
-output_file.write("Election Results\n")
-output_file.write("...........................\n")
-output_file.write(f"Total Votes: {total_votes}\n")
-output_file.write("...........................\n")
-   # calc and write %
-for can_name, votes in can_votes.items():
-    percent_votes_each = (votes / total_votes) * 100
-output_file.write(f"{can_name}: {percent_votes_each:.2f}% ({votes})\n") 
+    # print results to analysis text file
+    output_file = open("PyPoll Analysis.txt", "w")
+    output_file.write("Election Results\n")
+    output_file.write("...........................\n")
+    output_file.write(f"Total Votes: {total_votes}\n")
+    output_file.write("...........................\n")
+    # calc and write %
+    for can_name, votes in can_votes.items():
+        percent_votes_each = (votes / total_votes) * 100
+        output_file.write(f"{can_name}: {percent_votes_each:.2f}% ({votes})\n") 
     
-output_file.write("...........................\n")
-output_file.write(f"Winner:{winner}\n")
-output_file.write("............................\n")
+    output_file.write("...........................\n")
+    output_file.write(f"Winner:{winner}\n")
+    output_file.write("............................\n")
 
-# close output file
-output_file.close()
+    # close output file
+    output_file.close()
